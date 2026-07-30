@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>General Studies — Current Affairs Booklet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --paper: #EAE1C8;
+    --paper-dark: #DCCFA9;
+    --card: #FBF7EC;
+    --ink: #23252A;
+    --ink-soft: #4A4A45;
+    --navy: #1D2E4A;
+    --navy-soft: #33456A;
+    --gold: #A8791F;
+    --stamp-red: #9C3B2E;
+    --stamp-green: #2E6B4F;
+    --line: #C9BA92;
+    --focus: #1D2E4A;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+
+  body{
+    background:
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.35), transparent 55%),
+      repeating-linear-gradient(135deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 2px, transparent 2px, transparent 5px),
+      var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    padding: 32px 16px 60px;
+    display:flex;
+    justify-content:center;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  .sheet{
+    width:100%;
+    max-width: 660px;
+  }
+
+  /* ===== Admit-card header ===== */
+  .admit{
+    background: var(--card);
+    border: 1.5px solid var(--navy);
+    border-radius: 14px;
+    padding: 22px 24px 18px;
+    position: relative;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 10px 24px -14px rgba(29,46,74,0.35);
+  }
+  .admit::before{
+    content:"";
+    position:absolute; inset:6px;
+    border: 1px dashed var(--line);
+    border-radius: 9px;
+    pointer-events:none;
+  }
+  .admit-top{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:14px;
+  }
+  .seal{
+    width:44px; height:44px; border-radius:50%;
+    border:2px solid var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    background: repeating-conic-gradient(from 0deg, var(--navy) 0deg 6deg, transparent 6deg 18deg);
+  }
+  .seal-inner{
+    width:26px; height:26px; border-radius:50%;
+    background: var(--card);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Source Serif 4', serif; font-weight:700; color:var(--navy); font-size:13px;
+  }
+  .title-block{ flex:1; min-width:0; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--gold); font-weight:600;
+  }
+  h1{
+    font-family:'Source Serif 4', serif;
+    font-size: clamp(20px, 4.5vw, 26px);
+    font-weight:700;
+    margin: 2px 0 4px;
+    color: var(--navy);
+    line-height:1.15;
+  }
+  .subtitle{ font-size:13px; color:var(--ink-soft); }
+
+  .admit-meta{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:16px; padding-top:12px;
+    border-top: 1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color: var(--ink-soft);
+  }
+  .admit-meta strong{ color:var(--navy); font-weight:600; }
+
+  /* ===== Progress track ===== */
+  .progress-track{
+    display:flex; gap:6px; margin: 18px 2px 0;
+    flex-wrap:wrap;
+  }
+  .dot{
+    flex:1; min-width:14px; height:8px; border-radius:4px;
+    background: rgba(29,46,74,0.12);
+    border: 1px solid rgba(29,46,74,0.18);
+    transition: background .25s ease, transform .25s ease;
+  }
+  .dot.answered{ background: var(--navy); border-color:var(--navy); }
+  .dot.current{ transform: scaleY(1.6); background: var(--gold); border-color:var(--gold); }
+
+  /* ===== Screens ===== */
+  .screen{ display:none; }
+  .screen.active{ display:block; }
+
+  /* Instructions */
+  .instructions{
+    background: var(--card);
+    border: 1.5px solid var(--navy);
+    border-radius:14px;
+    padding: 26px 26px 24px;
+    margin-top:18px;
+  }
+  .instructions h2{
+    font-family:'Source Serif 4', serif;
+    color:var(--navy); font-size:18px; margin:0 0 12px;
+  }
+  .instructions ol{ margin:0 0 20px; padding-left:20px; color:var(--ink-soft); font-size:14px; line-height:1.7; }
+  .instructions li{ margin-bottom:6px; }
+  .instructions li strong{ color:var(--ink); }
+
+  .btn{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600; font-size:14px; letter-spacing:.02em;
+    padding: 12px 22px;
+    border-radius: 8px;
+    border: 1.5px solid var(--navy);
+    background: var(--navy);
+    color: var(--card);
+    cursor:pointer;
+    transition: transform .12s ease, background .12s ease;
+  }
+  .btn:hover{ background: var(--navy-soft); }
+  .btn:active{ transform: translateY(1px); }
+  .btn:focus-visible{ outline: 3px solid var(--gold); outline-offset:2px; }
+  .btn.ghost{
+    background: transparent; color: var(--navy);
+  }
+  .btn.ghost:hover{ background: rgba(29,46,74,0.06); }
+  .btn:disabled{ opacity:.4; cursor:not-allowed; }
+
+  .btn-row{ display:flex; justify-content:flex-end; gap:10px; margin-top:6px; }
+  .btn-row.split{ justify-content:space-between; }
+
+  /* Question card */
+  .qcard{
+    background: var(--card);
+    border: 1.5px solid var(--navy);
+    border-radius:14px;
+    padding: 24px 24px 20px;
+    margin-top:16px;
+  }
+  .qhead{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    padding: 3px 9px; border-radius:20px;
+    border:1px solid currentColor;
+    font-weight:600;
+  }
+  .tag.factual{ color:#1D2E4A; }
+  .tag.conceptual{ color:#8A5A0F; }
+  .tag.analytical{ color:#7A2E24; }
+  .qnum{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft); }
+
+  .qtext{
+    font-family:'Source Serif 4', serif;
+    font-size: 18px; line-height:1.45; color:var(--ink);
+    margin: 0 0 18px;
+  }
+
+  .options{ display:flex; flex-direction:column; gap:10px; }
+  .option{
+    display:flex; align-items:center; gap:13px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius:10px;
+    background: rgba(255,255,255,0.5);
+    cursor:pointer;
+    font-size:14.5px;
+    color: var(--ink);
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .option:hover{ border-color: var(--navy-soft); background: rgba(29,46,74,0.05); }
+  .option:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+
+  .bubble{
+    width:28px; height:28px; border-radius:50%;
+    border: 2px solid var(--navy);
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:12.5px;
+    color: var(--navy);
+    background: transparent;
+    position:relative;
+    transition: transform .15s ease;
+  }
+  .option.selected .bubble{
+    background: var(--navy);
+    color: var(--card);
+    transform: rotate(-6deg) scale(1.04);
+  }
+  .option.correct{ border-color: var(--stamp-green); background: rgba(46,107,79,0.08); }
+  .option.correct .bubble{ border-color: var(--stamp-green); background: var(--stamp-green); color:#fff; }
+  .option.incorrect{ border-color: var(--stamp-red); background: rgba(156,59,46,0.08); }
+  .option.incorrect .bubble{ border-color: var(--stamp-red); background: var(--stamp-red); color:#fff; }
+  .option.locked{ cursor:default; }
+  .option.dim{ opacity:.55; }
+
+  /* Feedback stamp */
+  .feedback{
+    margin-top:16px;
+    display:none;
+    gap:14px;
+    align-items:flex-start;
+    padding-top:14px;
+    border-top: 1px dashed var(--line);
+  }
+  .feedback.show{ display:flex; }
+  .stampmark{
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    font-size: 13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding: 6px 12px;
+    border: 3px solid;
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    transform: rotate(-7deg);
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+  .stampmark.right{ color: var(--stamp-green); border-color: var(--stamp-green); }
+  .stampmark.wrong{ color: var(--stamp-red); border-color: var(--stamp-red); }
+  .explain{ font-size:13.5px; line-height:1.55; color: var(--ink-soft); }
+  .explain strong{ color:var(--ink); }
+
+  /* ===== Result screen ===== */
+  .result-head{
+    background: var(--card);
+    border: 1.5px solid var(--navy);
+    border-radius:14px;
+    padding: 30px 26px 26px;
+    margin-top:18px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .result-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--gold); font-weight:600; margin-bottom:6px;
+  }
+  .result-title{ font-family:'Source Serif 4', serif; font-size:22px; color:var(--navy); margin:0 0 18px; }
+
+  .bigstamp{
+    display:inline-block;
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    padding: 16px 30px;
+    border: 4px solid var(--stamp-red);
+    color: var(--stamp-red);
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    transform: rotate(-6deg);
+    font-size: clamp(22px, 6vw, 30px);
+    letter-spacing:.03em;
+    margin-bottom: 20px;
+  }
+  .bigstamp.pass{ border-color: var(--stamp-green); color:var(--stamp-green); }
+
+  .breakdown{
+    display:flex; justify-content:center; gap:22px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-soft);
+  }
+  .breakdown .num{ display:block; font-size:20px; color:var(--navy); font-weight:600; }
+
+  .review-list{ margin-top:18px; display:flex; flex-direction:column; gap:10px; }
+  .review-item{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow:hidden;
+  }
+  .review-summary{
+    display:flex; align-items:center; gap:10px;
+    padding: 12px 14px;
+    cursor:pointer;
+    font-size:13.5px;
+    list-style:none;
+  }
+  .review-summary::-webkit-details-marker{ display:none; }
+  .review-mark{
+    width:22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:700; color:#fff; flex-shrink:0;
+  }
+  .review-mark.ok{ background:var(--stamp-green); }
+  .review-mark.no{ background:var(--stamp-red); }
+  .review-qtext{ flex:1; color:var(--ink); }
+  .review-body{
+    padding: 0 14px 14px 46px;
+    font-size:13px; color:var(--ink-soft); line-height:1.6;
+  }
+  .review-body .yours{ color: var(--stamp-red); }
+  .review-body .yours.correct-pick{ color: var(--stamp-green); }
+
+  footer.note{
+    text-align:center; font-size:11.5px; color: var(--ink-soft);
+    margin-top: 22px; font-family:'IBM Plex Mono', monospace;
+    letter-spacing:.03em;
+  }
+
+  /* ===== Brand header ===== */
+  .brandbar{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+    background: var(--navy);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+  .brand-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .brand-logo{ flex-shrink:0; }
+  .brand-text{ line-height:1.1; min-width:0; }
+  .brand-name{
+    font-family:'Source Serif 4', serif; font-weight:700;
+    color:#F7F1DE; font-size:16px; letter-spacing:.01em;
+    display:flex; align-items:baseline; gap:6px;
+  }
+  .brand-name .pro{
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:9.5px;
+    color: var(--navy); background: var(--gold);
+    padding: 2px 5px; border-radius:4px; letter-spacing:.06em;
+  }
+  .brand-tag{ font-size:10.5px; color: rgba(247,241,222,0.65); font-family:'IBM Plex Mono', monospace; letter-spacing:.03em; }
+  .brand-link{
+    flex-shrink:0;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:12.5px; font-weight:600;
+    color: #F7F1DE;
+    text-decoration:none;
+    border: 1.5px solid rgba(247,241,222,0.4);
+    padding: 8px 13px;
+    border-radius: 8px;
+    white-space:nowrap;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .brand-link:hover{ background: rgba(247,241,222,0.1); border-color: var(--gold); }
+  .brand-link:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+
+  /* ===== Disclaimer + CTA on result screen ===== */
+  .practice-note{
+    display:flex; gap:12px; align-items:flex-start;
+    background: rgba(168,121,31,0.1);
+    border: 1.5px dashed var(--gold);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height:1.55;
+  }
+  .practice-note .icon{
+    flex-shrink:0; width:20px; height:20px; border-radius:50%;
+    border:1.5px solid var(--gold); color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:12px;
+    margin-top:1px;
+  }
+  .practice-note strong{ color: var(--ink); }
+
+  .cta-row{
+    display:flex; justify-content:center; margin-top:18px;
+  }
+  .cta-link{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600; font-size:14.5px;
+    color: var(--card);
+    background: var(--navy);
+    text-decoration:none;
+    padding: 13px 26px;
+    border-radius: 8px;
+    border: 1.5px solid var(--navy);
+    transition: background .15s ease;
+  }
+  .cta-link:hover{ background: var(--navy-soft); }
+  .cta-link:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="brandbar">
+    <div class="brand-left">
+      <svg class="brand-logo" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="17" cy="17" r="16" fill="#F7F1DE"/>
+        <circle cx="17" cy="17" r="16" stroke="#A8791F" stroke-width="1.2"/>
+        <path d="M17 7a7.5 7.5 0 0 0-4.2 13.7c.5.35.7.9.7 1.5v.3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-.3c0-.6.2-1.15.7-1.5A7.5 7.5 0 0 0 17 7Z" fill="#1D2E4A"/>
+        <rect x="14" y="24.7" width="6" height="1.6" rx="0.8" fill="#1D2E4A"/>
+        <path d="M17 10.6c-2.4 0-4 1.7-4 3.9" stroke="#F7F1DE" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="17" cy="17.2" r="1.3" fill="#F7F1DE"/>
+      </svg>
+      <div class="brand-text">
+        <div class="brand-name">QuizMind<span class="pro">PRO</span></div>
+        <div class="brand-tag">Practice Companion</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="admit">
+    <div class="admit-top">
+      <div class="seal"><div class="seal-inner">GS</div></div>
+      <div class="title-block">
+        <div class="eyebrow">Admit Card · Booklet Series D</div>
+        <h1>General Studies — Current Affairs</h1>
+        <div class="subtitle">Prepared from The Hindu Daily Digest — 29 July 2026</div>
+      </div>
+    </div>
+    <div class="admit-meta">
+      <span>Roll No. <strong id="rollNo">—</strong></span>
+      <span>Time Elapsed <strong id="timer">00:00</strong></span>
+    </div>
+  </div>
+
+  <div class="progress-track" id="progressTrack"></div>
+
+  <!-- INSTRUCTIONS -->
+  <div class="screen active" id="screen-instructions">
+    <div class="instructions">
+      <h2>Instructions to Candidates</h2>
+      <ol>
+        <li>This booklet contains <strong>13 questions</strong> across three sections: Conceptual, Analytical, and Assertion–Reason / Statement-based.</li>
+        <li>Each question carries <strong>1 mark</strong>. There is <strong>no negative marking</strong>.</li>
+        <li>Darken the bubble against the option you consider correct. The correct answer and explanation are revealed immediately after you answer.</li>
+        <li>You may navigate freely between questions using <strong>Previous / Next</strong>.</li>
+        <li>A result sheet with a category-wise breakdown will be issued at the end.</li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn" id="beginBtn">Begin Exam</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="screen" id="screen-quiz">
+    <div class="qcard">
+      <div class="qhead">
+        <span class="tag" id="qtag">FACTUAL</span>
+        <span class="qnum" id="qnum">Q1 / 11</span>
+      </div>
+      <p class="qtext" id="qtext"></p>
+      <div class="options" id="optionsWrap"></div>
+      <div class="feedback" id="feedback">
+        <span class="stampmark" id="stampmark">Correct</span>
+        <p class="explain" id="explainText"></p>
+      </div>
+    </div>
+    <div class="btn-row split">
+      <button class="btn ghost" id="prevBtn">← Previous</button>
+      <button class="btn" id="nextBtn" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="result-head">
+      <div class="result-eyebrow">Result Sheet</div>
+      <div class="result-title">Booklet Series D — Final Score</div>
+      <div class="bigstamp" id="bigStamp">0 / 11</div>
+      <div class="breakdown" id="breakdown"></div>
+    </div>
+    <div class="review-list" id="reviewList"></div>
+
+    <div class="practice-note">
+      <span class="icon">i</span>
+      <div><strong>For practice purposes only.</strong> This booklet is a standalone revision exercise — your score, answers, and time are not recorded or synced to your QuizMind Pro dashboard.</div>
+    </div>
+
+    <div class="btn-row" style="justify-content:center; margin-top:20px;">
+      <button class="btn ghost" id="retakeBtn">↺ Retake Exam</button>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta-link" href="https://quizmind-pro.onrender.com/" rel="noopener">Continue to QuizMind Pro →</a>
+    </div>
+  </div>
+
+  <footer class="note">Answer key and explanations set by the examiner · No re-evaluation requests entertained</footer>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    cat: "conceptual",
+    q: "India's IIP grew at 7.3% in June 2026 — a 23-month high. Consider the following statements about the Index of Industrial Production (IIP):\n\n1. The IIP is compiled by the National Statistical Office (NSO) under MoSPI with base year 2011-12.\n2. Manufacturing carries the highest sectoral weight at 77.63% in the IIP.\n3. The Eight Core Industries together account for about 60% of the IIP.\n4. Capital goods output is used as a proxy for consumption demand in the economy.\n\nWhich of the statements given above are CORRECT?",
+    options: [
+      "1 and 2 only",
+      "1, 2 and 3 only",
+      "2, 3 and 4 only",
+      "1, 2, 3 and 4"
+    ],
+    correct: 0,
+    explain: "Statements 1 and 2 are correct. The IIP is compiled by NSO/MoSPI with base year 2011-12, and manufacturing has the highest weight at 77.63%. Statement 3 is wrong — the Eight Core Industries carry about 40.27%, not 60%, of the IIP weight. Statement 4 is wrong — capital goods output is a proxy for investment demand, not consumption demand."
+  },
+  {
+    cat: "analytical",
+    q: "ASSERTION (A): Analysts caution that India's June 2026 IIP growth of 7.3% may not be sustained.\n\nREASON (R): A lower-than-expected monsoon and continued uncertainty from the war in West Asia (which affects crude prices, freight and insurance costs) pose downside risks to industrial output.\n\nChoose the correct answer:",
+    options: [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correct: 0,
+    explain: "Both A and R are true and R correctly explains A. Analysts flagged that monsoon deficiency affects agricultural inputs and rural demand, while West Asia-linked crude and freight costs directly squeeze industrial margins — both are legitimate reasons why a single month's high figure may not sustain."
+  },
+  {
+    cat: "conceptual",
+    q: "The Centre reissued the Western Ghats Ecologically Sensitive Area (ESA) draft notification on 27 July 2026 — the seventh time in over a decade. Consider these statements:\n\n1. ESAs are notified by the Centre under Section 3 of the Environment (Protection) Act, 1986.\n2. The Gadgil panel (WGEEP, 2011) recommended the entire 1,29,000 sq km of the Western Ghats be treated as ecologically sensitive.\n3. The Kasturirangan HLWG (2013) recommended designating about 37% of the Ghats — roughly 59,940 sq km — as ESA.\n4. The Western Ghats is a UNESCO World Heritage Site and one of the world's twelve biodiversity hotspots.\n\nWhich statements are CORRECT?",
+    options: [
+      "1, 2 and 3 only",
+      "2 and 3 only",
+      "1 and 4 only",
+      "1, 2, 3 and 4"
+    ],
+    correct: 0,
+    explain: "Statements 1, 2 and 3 are correct. Statement 4 is wrong — the Western Ghats is one of the world's eight 'hottest' biodiversity hotspots, not twelve. The legal basis (EPA Sec 3), Gadgil's full-range recommendation, and Kasturirangan's 37% figure are all accurate."
+  },
+  {
+    cat: "analytical",
+    q: "ASSERTION (A): West Bengal's amendment transferring cheque-signing and financial disbursement powers from elected gram panchayat pradhans to panchayat secretaries and BDOs has been criticised as hollowing out constitutional local self-government.\n\nREASON (R): The 73rd Constitutional Amendment mandates devolution of funds, functions, and functionaries to panchayats, and the Eleventh Schedule lists 29 subjects recommended for devolution.\n\nChoose the correct answer:",
+    options: [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correct: 0,
+    explain: "Both are true and R explains A. The 73rd Amendment's vision of devolution — especially of financial authority — is precisely what is being reversed by channelling payments through bureaucrats rather than elected representatives. The Eleventh Schedule's 29 subjects include local planning, minor irrigation, and rural development, all requiring financial authority to implement."
+  },
+  {
+    cat: "conceptual",
+    q: "Consider the following pairs regarding the Cauvery water dispute:\n\n1. CWMA — constituted after the Supreme Court's February 2018 judgment; apex implementing body\n2. CWRC — technical/regulation arm of the Cauvery mechanism\n3. Article 262 — empowers Parliament to provide for inter-State water dispute adjudication and bar court jurisdiction\n4. Water (inter-State rivers) — Entry 17, State List; regulation of inter-State rivers — Entry 56, Union List\n\nHow many of the above pairs are CORRECTLY matched?",
+    options: [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four"
+    ],
+    correct: 3,
+    explain: "All four pairs are correctly matched. CWMA (implementing) and CWRC (technical/regulatory) were both constituted post the SC's Feb 2018 verdict. Article 262 gives Parliament the power to adjudicate and exclude court jurisdiction. Water is Entry 17 (State List) and inter-State river regulation is Entry 56 (Union List) — a key constitutional division for inter-State water disputes."
+  },
+  {
+    cat: "analytical",
+    q: "The Ministry of Civil Aviation is examining whether to relax cross-ownership restrictions between airport operators and airlines, following a request from the Adani Group. Which of the following best captures the core regulatory concern with relaxing such restrictions in India's context?",
+    options: [
+      "It would reduce airport revenues and harm the UDAN scheme",
+      "It would allow a vertically integrated entity to control airport infrastructure and airline operations simultaneously, potentially compromising slot allocation, terminal access and gate assignment neutrality in a competitive private market",
+      "It would violate India's bilateral air services agreements with other countries",
+      "It would transfer regulatory authority from DGCA to AERA, creating a jurisdictional vacuum"
+    ],
+    correct: 1,
+    explain: "The digest identifies vertical integration as the core concern — if the same group controls airports and an airline, it can favour its own carrier in slot allocation, terminal access and gate assignment, distorting competition. Unlike Singapore, Qatar or Dubai (where common ownership exists between state entities with a dominant flag carrier), India has a competitive private market where such concentration raises serious Competition Act concerns."
+  },
+  {
+    cat: "conceptual",
+    q: "Consider the following statements about Tiger conservation in India:\n\n1. Project Tiger was launched in 1973 and India now has 58 Tiger Reserves spanning about 84,488 sq km.\n2. The National Tiger Conservation Authority (NTCA) is a statutory body under the Wild Life (Protection) Act, 1972 as amended in 2006.\n3. The All-India Tiger Estimation is conducted every two years by NTCA with the Wildlife Institute of India.\n4. According to NTCA, 35–40% of India's tigers now live outside designated Tiger Reserves.\n5. Tigers are listed on Schedule I of the WLPA and Appendix I of CITES.\n\nWhich of the statements given above are CORRECT?",
+    options: [
+      "1, 2, 4 and 5 only",
+      "1, 3, 4 and 5 only",
+      "2, 3 and 4 only",
+      "1, 2, 3, 4 and 5"
+    ],
+    correct: 0,
+    explain: "Statements 1, 2, 4 and 5 are correct. Statement 3 is wrong — the All-India Tiger Estimation is conducted every four years (not two), by NTCA with the Wildlife Institute of India, using camera traps and the M-STrIPES platform."
+  },
+  {
+    cat: "analytical",
+    q: "ASSERTION (A): India's urban fire safety crisis — illustrated by the Aliganj, Lucknow fire (22 June 2026) and several other 2026 incidents — is fundamentally a governance deficit, not a legal or technological deficit.\n\nREASON (R): The 74th Constitutional Amendment gave Municipal Corporations responsibility for fire services, but city governments remain weak because Chief Ministers act as de facto mayors, elected representatives have visibility without power, and functions are scattered across development authorities, PWDs, and water boards — creating an accountability vacuum.\n\nChoose the correct answer:",
+    options: [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correct: 0,
+    explain: "Both are true and R explains A precisely. The digest notes that satellite imagery, drones, GIS and AI dashboards exist and can detect violations in real time — the gap is not technology or law but governance: fragmented accountability, weak urban bodies, and political interference in enforcement."
+  },
+  {
+    cat: "conceptual",
+    q: "With respect to India's right to protest, consider the following statements:\n\n1. The right to assemble peaceably and without arms flows from Article 19(1)(b), subject to reasonable restrictions under Article 19(3) in the interests of sovereignty, integrity, and public order.\n2. In Amit Sahni v. Commissioner of Police (2020, Shaheen Bagh), the Supreme Court held that public roads and pathways cannot be blocked indefinitely and protests must occur in designated areas.\n3. Section 163 of the Bharatiya Nagarik Suraksha Sanhita (BNSS) is the successor to Section 144 CrPC and gives magistrates power to issue prohibitory orders.\n4. Police is Entry 2 of the Union List, which is why there is no uniform national protest-policing protocol.\n\nWhich of the statements given above are CORRECT?",
+    options: [
+      "1, 2 and 3 only",
+      "2, 3 and 4 only",
+      "1 and 2 only",
+      "1, 2, 3 and 4"
+    ],
+    correct: 0,
+    explain: "Statements 1, 2 and 3 are correct. Statement 4 is wrong — Police is Entry 2 of the State List (not the Union List), which is precisely why there is no uniform national policing SOP and why the BPR&D can only issue a Model Police Manual, not binding national rules."
+  },
+  {
+    cat: "analytical",
+    q: "Iran's simultaneous engagement with both the Taliban and the Northern Alliance at Ayatollah Khamenei's funeral, despite not officially recognising the Taliban government, best illustrates which principle of statecraft?",
+    options: [
+      "Collective security — states pool sovereignty to deter common threats",
+      "Strategic hedging — maintaining ties with rival factions to preserve options, avoid dependence on any single actor, and protect core interests (border stability, water, refugees, Shia minority, ISKP containment) regardless of which side prevails",
+      "Ideological solidarity — Iran backs co-religionists regardless of political calculation",
+      "Bandwagoning — Iran is aligning with the strongest regional power to gain security guarantees"
+    ],
+    correct: 1,
+    explain: "The digest explicitly frames Iran's posture as 'not putting all its eggs in one basket.' Tehran invites both Taliban and Northern Alliance, maintains a Helmand water treaty with Afghanistan, hosts millions of Afghan refugees, and uses Pakistan as a backchannel to Washington — all classic strategic hedging to protect multiple core interests rather than betting on one side."
+  },
+  {
+    cat: "analytical",
+    q: "Consider the following statements about India's private space technology sector as reported in The Hindu (29 July 2026):\n\n1. India's space-tech funding reached a record $200 million in 2025, with Bengaluru attracting more than half the money.\n2. Skyroot's Vikram-1 is India's first privately developed orbital-class rocket, distinct from the sub-orbital Vikram-S.\n3. The Indian Space Policy 2023 designates IN-SPACe as the R&D and advanced-missions body, and ISRO as the single-window promoter for private entities.\n4. 100% FDI was permitted in 2024 in satellite manufacturing and operation.\n\nWhich of the statements given above are CORRECT?",
+    options: [
+      "1 and 2 only",
+      "1, 2 and 4 only",
+      "2, 3 and 4 only",
+      "1, 2, 3 and 4"
+    ],
+    correct: 1,
+    explain: "Statements 1, 2 and 4 are correct. Statement 3 reverses the roles — under Indian Space Policy 2023, ISRO handles R&D and advanced missions while IN-SPACe is the single-window promoter and regulator for non-government entities. NSIL is ISRO's commercial, demand-driven arm."
+  },
+  {
+    cat: "conceptual",
+    q: "ASSERTION (A): Andromeda galaxy is said to be transitioning to its 'middle age' — moving from an active, star-forming state toward a quiescent, 'red and dead' galaxy.\n\nREASON (R): Hubble Space Telescope data shows Andromeda's star-formation rate has steadily dropped over the last 40 million years, with a 'dead zone' near its satellite galaxy M32 where star formation has nearly ceased — likely because M32 crashed through Andromeda's stellar disc, disrupting the cold gas clouds needed for star formation.\n\nChoose the correct answer:",
+    options: [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correct: 0,
+    explain: "Both A and R are true and R correctly explains A. The quenching of star formation — the defining feature of galactic 'middle age' — is directly attributable to the loss of cold molecular gas. The M32 interaction provides the mechanism: a satellite galaxy crashing through the disc disperses or heats the gas clouds, suppressing new star formation in that region."
+  },
+  {
+    cat: "analytical",
+    q: "The article on ethics and emotions in world politics (The Hindu, 29 July 2026) argues that Hans Morgenthau's Realism — the dominant post-War IR framework — reduced world politics to two ideas. Which two, and what does the article identify as its key blind spot?",
+    options: [
+      "Power and deterrence; its blind spot is that it ignores military capability",
+      "Anarchy and national interest; its blind spot is that it treats emotions — fear, grief, anger, humiliation, empathy and pride — as irrational noise rather than integral to political judgment",
+      "Democracy and interdependence; its blind spot is that it ignores the role of trade",
+      "Sovereignty and balance of power; its blind spot is that it cannot explain alliance formation"
+    ],
+    correct: 1,
+    explain: "The digest states Morgenthau's Realism was publicly reduced to 'anarchy and national interest.' Scholars like Neta Crawford and Brent Sasley counter that emotions are integral to — not the opposite of — political judgment. The Khamenei assassination producing national solidarity beyond military calculation, and shifting global perceptions of Israel, are cited as concrete illustrations of how emotion shapes international outcomes in ways Realist calculus misses."
+  }
+];
+
+const CAT_LABEL = { factual: "Factual", conceptual: "Conceptual", analytical: "Analytical" };
+
+let current = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+let startTime = null;
+let timerInterval = null;
+
+const rollNo = Math.floor(100000 + Math.random()*899999);
+document.getElementById('rollNo').textContent = rollNo;
+
+const progressTrack = document.getElementById('progressTrack');
+QUESTIONS.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot';
+  d.id = 'dot-' + i;
+  progressTrack.appendChild(d);
+});
+
+function renderProgress(){
+  QUESTIONS.forEach((_, i) => {
+    const d = document.getElementById('dot-' + i);
+    d.classList.toggle('answered', answers[i] !== null);
+    d.classList.toggle('current', i === current);
+  });
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startTimer(){
+  startTime = Date.now();
+  timerInterval = setInterval(() => {
+    const secs = Math.floor((Date.now() - startTime)/1000);
+    const m = String(Math.floor(secs/60)).padStart(2,'0');
+    const s = String(secs%60).padStart(2,'0');
+    document.getElementById('timer').textContent = m + ':' + s;
+  }, 1000);
+}
+
+document.getElementById('beginBtn').addEventListener('click', () => {
+  showScreen('screen-quiz');
+  startTimer();
+  renderQuestion();
+});
+
+function renderQuestion(){
+  const item = QUESTIONS[current];
+  document.getElementById('qtag').textContent = CAT_LABEL[item.cat].toUpperCase();
+  document.getElementById('qtag').className = 'tag ' + item.cat;
+  document.getElementById('qnum').textContent = `Q${current+1} / ${QUESTIONS.length}`;
+  document.getElementById('qtext').textContent = item.q;
+
+  const wrap = document.getElementById('optionsWrap');
+  wrap.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  const chosen = answers[current];
+
+  item.options.forEach((opt, i) => {
+    const el = document.createElement('div');
+    el.className = 'option';
+    el.tabIndex = 0;
+    el.setAttribute('role','button');
+    el.innerHTML = `<span class="bubble">${letters[i]}</span><span>${opt}</span>`;
+
+    if(chosen !== null){
+      el.classList.add('locked');
+      if(i === item.correct) el.classList.add('correct');
+      if(i === chosen && chosen !== item.correct) el.classList.add('incorrect');
+      if(i !== item.correct && i !== chosen) el.classList.add('dim');
+      if(i === chosen) el.classList.add('selected');
+    }
+
+    el.addEventListener('click', () => selectOption(i));
+    el.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); selectOption(i); }
+    });
+    wrap.appendChild(el);
+  });
+
+  const feedback = document.getElementById('feedback');
+  if(chosen !== null){
+    feedback.classList.add('show');
+    const isRight = chosen === item.correct;
+    const stamp = document.getElementById('stampmark');
+    stamp.textContent = isRight ? 'Correct' : 'Incorrect';
+    stamp.className = 'stampmark ' + (isRight ? 'right' : 'wrong');
+    document.getElementById('explainText').innerHTML = `<strong>Why:</strong> ${item.explain}`;
+  } else {
+    feedback.classList.remove('show');
+  }
+
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = chosen === null;
+  document.getElementById('nextBtn').textContent = current === QUESTIONS.length - 1 ? 'Finish →' : 'Next →';
+
+  renderProgress();
+}
+
+function selectOption(i){
+  if(answers[current] !== null) return; // locked after first answer
+  answers[current] = i;
+  renderQuestion();
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if(current > 0){ current--; renderQuestion(); }
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if(current < QUESTIONS.length - 1){
+    current++;
+    renderQuestion();
+  } else {
+    finishExam();
+  }
+});
+
+function finishExam(){
+  clearInterval(timerInterval);
+  showScreen('screen-result');
+
+  let score = 0;
+  const catTotals = { factual:0, conceptual:0, analytical:0 };
+  const catScores = { factual:0, conceptual:0, analytical:0 };
+
+  QUESTIONS.forEach((item, i) => {
+    catTotals[item.cat]++;
+    if(answers[i] === item.correct){ score++; catScores[item.cat]++; }
+  });
+
+  const stampEl = document.getElementById('bigStamp');
+  stampEl.textContent = `${score} / ${QUESTIONS.length}`;
+  stampEl.classList.toggle('pass', score >= Math.ceil(QUESTIONS.length * 0.6));
+
+  const breakdown = document.getElementById('breakdown');
+  breakdown.innerHTML = Object.keys(catTotals).map(cat => `
+    <div><span class="num">${catScores[cat]}/${catTotals[cat]}</span>${CAT_LABEL[cat]}</div>
+  `).join('');
+
+  const letters = ['A','B','C','D'];
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = QUESTIONS.map((item, i) => {
+    const chosen = answers[i];
+    const isRight = chosen === item.correct;
+    return `
+      <details class="review-item">
+        <summary class="review-summary">
+          <span class="review-mark ${isRight ? 'ok' : 'no'}">${isRight ? '✓' : '✕'}</span>
+          <span class="review-qtext">Q${i+1}. ${item.q}</span>
+        </summary>
+        <div class="review-body">
+          <div>Your answer: <span class="${isRight ? 'yours correct-pick' : 'yours'}">${letters[chosen]}. ${item.options[chosen]}</span></div>
+          ${!isRight ? `<div>Correct answer: <strong>${letters[item.correct]}. ${item.options[item.correct]}</strong></div>` : ''}
+          <div style="margin-top:6px;">${item.explain}</div>
+        </div>
+      </details>
+    `;
+  }).join('');
+}
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  document.getElementById('timer').textContent = '00:00';
+  showScreen('screen-instructions');
+});
+</script>
+</body>
+</html>
